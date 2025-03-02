@@ -1,25 +1,14 @@
-import { Link } from "react-router-dom";
-
-const ProductCard = ({
-  id = 1,
-  name = "Sample Product",
-  price = 99.99,
-  image = "https://placehold.co/600x400",
-  description = "This is a sample product description. It showcases the product's features and benefits.",
-}) => {
-  return (
-    <div className="product-card">
-      <img src={image} alt={name} className="product-image" />
-      <div className="product-info">
-        <h3>{name}</h3>
-        <p className="price">${price}</p>
-        <p className="description">{description}</p>
-        <Link to={`/product/${id}`} className="view-details">
-          View Details
-        </Link>
-      </div>
-    </div>
-  );
-};
+const ProductCard = ({ product }) => (
+  console.log(product),
+  <div className="p-4 border rounded-md shadow-md bg-white">
+    <img src={product.image.url} alt={product.image.alt} className="w-full h-48 object-cover rounded-md" />
+    <h2 className="text-xl font-bold mt-2">{product.title}</h2>
+    <p className="text-gray-700">{product.description}</p>
+    <p className="text-green-500 font-semibold mt-2">${product.price}</p>
+    <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+      Add to Cart
+    </button>
+  </div>
+);
 
 export default ProductCard;
