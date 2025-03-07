@@ -1,37 +1,71 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ShoppingCart, Menu, X, Search } from "lucide-react";
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    
-    return (
-        <nav className="bg-blue-600 text-white p-4 shadow-md">
-        <div className="container mx-auto flex justify-between items-center">
-          {/* Logo */}
-          <a href="/" className="text-2xl font-bold">MyBrand</a>
-  
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <nav className="bg-white shadow-md sticky top-0 z-50">
+      <div className="container mx-auto flex items-center justify-between p-4">
+        {/* Logo */}
+        <a href="/" className="text-2xl font-bold text-blue-600">
+          ShopLogo
+        </a>
+
+        {/* Search - Center on desktop, with cart on mobile */}
+        <div className="flex items-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
+          <div className="relative">
+            <input
+              type="text"
+              placeholder="Search..."
+              className="border rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <Search className="absolute left-2 top-2.5 text-gray-500" size={20} />
+          </div>
+          <div className="md:hidden">
+            <a href="#" className="text-gray-700 hover:text-blue-600">
+              <ShoppingCart size={28} />
+            </a>
+          </div>
+        </div>
+
+        {/* Navigation Links and Cart for Desktop / Menu Button for Mobile */}
+        <div className="flex items-center gap-4">
+          {/* Navigation Links */}
+          <div
+            className={`flex flex-col md:flex-row md:items-center md:gap-6 absolute md:static bg-white w-full md:w-auto left-0 top-16 md:top-auto transition-transform transform ${
+              isOpen ? "translate-x-0" : "-translate-x-full"
+            } md:translate-x-0 p-4 md:p-0 shadow-md md:shadow-none`}
+          >
+            <a href="#" className="text-gray-700 hover:text-blue-600">
+              Home
+            </a>
+            <a href="#" className="text-gray-700 hover:text-blue-600">
+              Products
+            </a>
+            <a href="#" className="text-gray-700 hover:text-blue-600">
+              Contact
+            </a>
+          </div>
+
+          {/* Cart Icon - Desktop Only */}
+          <div className="hidden md:block">
+            <a href="#" className="text-gray-700 hover:text-blue-600">
+              <ShoppingCart size={28} />
+            </a>
+          </div>
+
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden block"
+            className="md:hidden text-gray-700"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
-  
-          {/* Navigation Links */}
-          <ul
-            className={`md:flex gap-6 absolute md:static top-24 left-0 w-full md:w-auto bg-blue-600 md:bg-transparent p-4 md:p-0 ${
-              isOpen ? "block" : "hidden"
-            }`}
-          >
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/contact">Contact</Link></li>
-          </ul>
         </div>
-      </nav>
-    );
+      </div>
+    </nav>
+  );
 };
 
 export default Navbar;
