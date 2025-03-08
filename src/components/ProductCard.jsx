@@ -1,6 +1,13 @@
+import { useNavigate } from 'react-router-dom';
+
 const ProductCard = ({ product }) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden">
+    <div 
+      onClick={() => navigate(`/product/${product.id}`)}
+      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+    >
       <img
         src={product.image.url}
         alt={product.image.alt || product.title}
