@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const [isLoading, setIsLoading] = useState(true); 
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -34,13 +35,21 @@ const ProductDetails = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto">
-        <div className="md:flex">
-          <div className="md:flex-shrink-0">
+        <div className="flex flex-col">
+          <div className="w-full relative">
             <img
               src={product.image.url}
               alt={product.image.alt || product.title}
-              className="h-96 w-full object-cover md:w-96"
+              className="w-full h-[400px] object-cover"
             />
+            <button 
+              onClick={() => setIsLightboxOpen(true)}
+              className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
           </div>
           <div className="p-8">
             <h1 className="text-2xl font-semibold mb-4">{product.title}</h1>
@@ -75,6 +84,25 @@ const ProductDetails = () => {
           </div>
         </div>
       </div>
+      {isLightboxOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50" onClick={() => setIsLightboxOpen(false)}>
+          <div className="max-w-4xl max-h-[90vh] relative">
+            <button
+              onClick={() => setIsLightboxOpen(false)}
+              className="absolute -top-10 right-0 text-white hover:text-gray-300 transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <img
+              src={product.image.url}
+              alt={product.image.alt || product.title}
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
