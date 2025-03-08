@@ -1,11 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { Fullscreen } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../store/cartSlice';
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(true); 
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const dispatch = useDispatch();
   
   useEffect(() => {
     const fetchProduct = async () => {
@@ -23,6 +27,10 @@ const ProductDetails = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product));
+  };
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;
@@ -47,7 +55,7 @@ const ProductDetails = () => {
               className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                <Fullscreen />
               </svg>
             </button>
           </div>
@@ -78,7 +86,10 @@ const ProductDetails = () => {
                 ))}
               </div>
             )}
-            <button className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors w-full md:w-auto">
+            <button 
+              onClick={handleAddToCart}
+              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors w-full md:w-auto"
+            >
               Add to Cart
             </button>
           </div>

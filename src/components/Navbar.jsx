@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
+import { Cart } from './Cart';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,11 +17,7 @@ const Navbar = () => {
         {/* Search - Center on desktop, with cart on mobile */}
         <div className="flex items-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
           <SearchBar />
-          <div className="md:hidden">
-            <a href="#" className="text-gray-700 hover:text-blue-600">
-              <ShoppingCart size={28} />
-            </a>
-          </div>
+  
         </div>
 
         {/* Navigation Links and Cart for Desktop / Menu Button for Mobile */}
@@ -42,12 +39,7 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Cart Icon - Desktop Only */}
-          <div className="hidden md:block">
-            <a href="#" className="text-gray-700 hover:text-blue-600">
-              <ShoppingCart size={28} />
-            </a>
-          </div>
+      
 
           {/* Mobile Menu Button */}
           <button
@@ -56,6 +48,8 @@ const Navbar = () => {
           >
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
+
+          <Cart />
         </div>
       </div>
     </nav>
