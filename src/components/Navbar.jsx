@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { ShoppingCart, Menu, X, Search } from "lucide-react";
+import { ShoppingCart, Menu, X } from "lucide-react";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
         {/* Logo */}
         <a href="/" className="text-2xl font-bold text-blue-600">
@@ -14,14 +15,7 @@ const Navbar = () => {
 
         {/* Search - Center on desktop, with cart on mobile */}
         <div className="flex items-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
-          <div className="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              className="border rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-            <Search className="absolute left-2 top-2.5 text-gray-500" size={20} />
-          </div>
+          <SearchBar />
           <div className="md:hidden">
             <a href="#" className="text-gray-700 hover:text-blue-600">
               <ShoppingCart size={28} />
