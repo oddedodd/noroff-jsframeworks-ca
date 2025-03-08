@@ -4,6 +4,7 @@ import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import { SearchProvider } from './context/SearchContext';
 import Contact from './pages/Contact';
+
 function App() {
   return (
     <SearchProvider>

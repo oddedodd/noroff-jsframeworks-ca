@@ -5,7 +5,7 @@ import ProductCard from './ProductCard';
 const ProductList = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { searchResults, selectedProduct } = useSearch();
+  const { searchResults } = useSearch();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -23,12 +23,8 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
-  // Determine which products to display
-  const displayProducts = selectedProduct 
-    ? [selectedProduct] 
-    : searchResults.length > 0 
-      ? searchResults 
-      : allProducts;
+  // Display search results if available, otherwise show all products
+  const displayProducts = searchResults.length > 0 ? searchResults : allProducts;
 
   if (isLoading) {
     return <div className="text-center py-8">Loading...</div>;

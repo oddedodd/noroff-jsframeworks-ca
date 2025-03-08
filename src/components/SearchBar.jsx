@@ -6,12 +6,13 @@ import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
   const { setSearchResults, searchResults, setSelectedProduct } = useSearch();
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProducts = async () => {
-      if (searchTerm.length === 0) {
+      if (!searchTerm.trim()) {
         setSearchResults([]);
         return;
       }
@@ -20,13 +21,10 @@ const SearchBar = () => {
       try {
         const response = await fetch('https://v2.api.noroff.dev/online-shop');
         const data = await response.json();
-        
-        const filteredProducts = data.data.filter(product =>
-          product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          product.description.toLowerCase().includes(searchTerm.toLowerCase())
+        const filtered = data.data.filter(product =>
+          product.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
-        
-        setSearchResults(filteredProducts);
+        setSearchResults(filtered);
       } catch (error) {
         console.error('Error fetching products:', error);
       } finally {
@@ -34,63 +32,58 @@ const SearchBar = () => {
       }
     };
 
-    const debounceTimer = setTimeout(() => {
-      fetchProducts();
-    }, 300);
-
-    return () => clearTimeout(debounceTimer);
+    const timeoutId = setTimeout(fetchProducts, 300);
+    return () => clearTimeout(timeoutId);
   }, [searchTerm, setSearchResults]);
 
-  const handleProductSelect = (product) => {
+  const handleProductClick = (product) => {
     setSelectedProduct(product);
-    setSearchTerm("");
-    navigate("/products"); // Navigate to products page when item is selected
+    setSearchTerm('');
+    setShowDropdown(false);
+    navigate(`/product/${product.id}`);
   };
 
   return (
-    <div className="relative">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="border rounded-md px-4 py-2 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full"
-        />
-        <Search className="absolute left-2 top-2.5 text-gray-500" size={20} />
-      </div>
+    <div className="relative w-64">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+          setShowDropdown(true);
+        }}
+        placeholder="Search products..."
+        className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      />
 
-      {/* Search Results Dropdown */}
-      {searchTerm.length > 0 && (
-        <div className="absolute mt-1 w-full bg-white border rounded-md shadow-lg max-h-96 overflow-y-auto z-50">
+      {showDropdown && searchTerm && (
+        <div className="absolute w-full mt-2 bg-white border rounded-lg shadow-lg max-h-96 overflow-y-auto z-50">
           {isLoading ? (
             <div className="p-4 text-center text-gray-500">Loading...</div>
-          ) : searchResults.length > 0 ? (
-            <ul>
-              {searchResults.map((product) => (
-                <li
-                  key={product.id}
-                  onClick={() => handleProductSelect(product)}
-                  className="p-2 hover:bg-gray-100 cursor-pointer border-b last:border-b-0"
-                >
-                  <div className="flex items-center gap-2">
+          ) : (
+            <>
+              {searchResults.length > 0 ? (
+                searchResults.map(product => (
+                  <div
+                    key={product.id}
+                    onClick={() => handleProductClick(product)}
+                    className="p-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2"
+                  >
                     <img
                       src={product.image.url}
-                      alt={product.image.alt || product.title}
-                      className="w-10 h-10 object-cover rounded"
+                      alt={product.title}
+                      className="w-12 h-12 object-cover rounded"
                     />
                     <div>
                       <div className="font-medium">{product.title}</div>
-                      <div className="text-sm text-gray-500">
-                        ${product.price}
-                      </div>
+                      <div className="text-sm text-gray-600">${product.price}</div>
                     </div>
                   </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="p-4 text-center text-gray-500">No results found</div>
+                ))
+              ) : (
+                <div className="p-4 text-center text-gray-500">No products found</div>
+              )}
+            </>
           )}
         </div>
       )}
