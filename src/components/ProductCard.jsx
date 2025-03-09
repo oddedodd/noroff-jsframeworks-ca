@@ -6,7 +6,7 @@ const ProductCard = ({ product }) => {
   return (
     <div 
       onClick={() => navigate(`/product/${product.id}`)}
-      className="bg-white rounded-lg shadow-md overflow-hidden cursor-pointer hover:shadow-lg transition-shadow"
+      className="bg-white rounded-lg overflow-hidden cursor-pointer hover:shadow-sm transition-shadow"
     >
       <img
         src={product.image.url}
