@@ -1,5 +1,13 @@
+/**
+ * @fileoverview Redux slice for managing shopping cart state including persistence to localStorage
+ */
+
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * Loads cart state from localStorage
+ * @returns {Object} Initial cart state with items array and total
+ */
 const loadCartState = () => {
   try {
     const serializedCart = localStorage.getItem('cart');
@@ -18,10 +26,19 @@ const loadCartState = () => {
   }
 };
 
+/**
+ * Redux slice for cart functionality
+ * @type {import('@reduxjs/toolkit').Slice}
+ */
 const cartSlice = createSlice({
   name: 'cart',
   initialState: loadCartState(),
   reducers: {
+    /**
+     * Adds an item to cart or increments quantity if it exists
+     * @param {Object} state - Current cart state
+     * @param {Object} action - Action with product payload
+     */
     addToCart: (state, action) => {
       const existingItem = state.items.find(item => item.id === action.payload.id);
       if (existingItem) {
@@ -35,6 +52,12 @@ const cartSlice = createSlice({
       // Save to localStorage
       localStorage.setItem('cart', JSON.stringify(state));
     },
+
+    /**
+     * Removes an item from cart
+     * @param {Object} state - Current cart state
+     * @param {Object} action - Action with product ID payload
+     */
     removeFromCart: (state, action) => {
       state.items = state.items.filter(item => item.id !== action.payload);
       state.total = state.items.reduce((total, item) => 
@@ -43,6 +66,12 @@ const cartSlice = createSlice({
       // Save to localStorage
       localStorage.setItem('cart', JSON.stringify(state));
     },
+
+    /**
+     * Updates quantity of an item in cart
+     * @param {Object} state - Current cart state
+     * @param {Object} action - Action with ID and quantity payload
+     */
     updateQuantity: (state, action) => {
       const { id, quantity } = action.payload;
       const item = state.items.find(item => item.id === id);
@@ -55,6 +84,11 @@ const cartSlice = createSlice({
         localStorage.setItem('cart', JSON.stringify(state));
       }
     },
+
+    /**
+     * Clears all items from cart
+     * @param {Object} state - Current cart state
+     */
     clearCart: (state) => {
       state.items = [];
       state.total = 0;
@@ -65,4 +99,4 @@ const cartSlice = createSlice({
 });
 
 export const { addToCart, removeFromCart, updateQuantity, clearCart } = cartSlice.actions;
-export default cartSlice.reducer; 
+export default cartSlice.reducer;

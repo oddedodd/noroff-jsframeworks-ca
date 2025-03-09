@@ -2,6 +2,22 @@ import { useState, useEffect } from 'react';
 import { useSearch } from '../context/SearchContext';
 import ProductCard from './ProductCard';
 
+/**
+ * Product list component that displays a grid of product cards
+ * @component
+ * @returns {JSX.Element} A responsive grid of product cards showing either search results or all products
+ * @example
+ * return (
+ *   <ProductList />
+ * )
+ * 
+ * The component:
+ * - Fetches product data from the API on mount
+ * - Displays loading state while fetching
+ * - Shows search results when available (via SearchContext)
+ * - Falls back to showing all products when no search results
+ * - Renders products in a responsive grid using the ProductCard component
+ */
 const ProductList = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

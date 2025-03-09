@@ -4,6 +4,23 @@ import { Fullscreen } from 'lucide-react';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../store/cartSlice';
 
+/**
+ * Product details component that displays detailed information about a specific product
+ * @component
+ * @returns {JSX.Element} A detailed product view with image, description, price, reviews and add to cart functionality
+ * @example
+ * return (
+ *   <ProductDetails />
+ * )
+ * 
+ * The component expects a product ID in the URL parameters and fetches the corresponding product data.
+ * It displays:
+ * - Product image with lightbox functionality
+ * - Product title and description
+ * - Price (with discount if applicable)
+ * - Reviews (if available)
+ * - Add to cart button
+ */
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
@@ -118,4 +135,4 @@ const ProductDetails = () => {
   );
 };
 
-export default ProductDetails; 
+export default ProductDetails;

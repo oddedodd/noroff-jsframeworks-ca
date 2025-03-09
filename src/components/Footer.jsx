@@ -1,5 +1,14 @@
 import React from 'react';
 
+/**
+ * Footer component that displays copyright information
+ * @component
+ * @returns {JSX.Element} A footer with copyright text
+ * @example
+ * return (
+ *   <Footer />
+ * )
+ */
 const Footer = () => {
   return (
     <footer className="bg-white py-4 bottom-0 w-full">

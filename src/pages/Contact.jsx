@@ -1,3 +1,19 @@
+/**
+ * Contact page component that displays a contact form
+ * @component
+ * @returns {JSX.Element} A contact form with fields for name, email, subject and message
+ * @example
+ * return (
+ *   <Contact />
+ * )
+ * 
+ * The component:
+ * - Renders a form with validation for all fields
+ * - Requires name, email, subject and message
+ * - Email must match standard email format
+ * - All text fields require minimum 3 characters
+ * - Shows success message on submit and resets form
+ */
 const Contact = () => {
   return (
     <div className="container mx-auto px-4 py-8">

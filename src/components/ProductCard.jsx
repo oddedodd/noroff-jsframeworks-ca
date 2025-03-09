@@ -1,5 +1,24 @@
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Product card component that displays product information and links to product details
+ * @component
+ * @param {Object} props - Component props
+ * @param {Object} props.product - Product data object
+ * @param {string} props.product.id - Unique identifier for the product
+ * @param {string} props.product.title - Product title/name
+ * @param {string} props.product.description - Product description
+ * @param {number} props.product.price - Original product price
+ * @param {number} props.product.discountedPrice - Discounted product price (if applicable)
+ * @param {Object} props.product.image - Product image data
+ * @param {string} props.product.image.url - URL of the product image
+ * @param {string} props.product.image.alt - Alt text for the product image
+ * @returns {JSX.Element} A card displaying product information with image, title, description and price
+ * @example
+ * return (
+ *   <ProductCard product={productData} />
+ * )
+ */
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
 

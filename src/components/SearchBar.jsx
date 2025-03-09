@@ -3,6 +3,23 @@ import { Search } from "lucide-react";
 import { useSearch } from "../context/SearchContext";
 import { useNavigate } from "react-router-dom";
 
+/**
+ * Search bar component that provides product search functionality with dropdown results
+ * @component
+ * @returns {JSX.Element} A search input with dropdown results showing matching products
+ * @example
+ * return (
+ *   <SearchBar />
+ * )
+ * 
+ * The component:
+ * - Provides real-time search as user types
+ * - Shows loading state while fetching results
+ * - Displays matching products in a dropdown
+ * - Each result shows product image, title and price
+ * - Clicking a result navigates to that product's details page
+ * - Uses debouncing to limit API calls
+ */
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -91,4 +108,4 @@ const SearchBar = () => {
   );
 };
 
-export default SearchBar; 
+export default SearchBar;

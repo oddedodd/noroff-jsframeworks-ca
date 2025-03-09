@@ -2,14 +2,31 @@ import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Checkout component that displays order summary and checkout form
+ * @component
+ * @returns {JSX.Element} A checkout page with order details and payment form
+ * @example
+ * return (
+ *   <Checkout />
+ * )
+ */
 const Checkout = () => {
+  /** @type {Object} cart - Cart state from Redux store containing items and total */
   const { items, total } = useSelector((state) => state.cart);
+  
+  /** @type {Function} dispatch - Redux dispatch function */
   const dispatch = useDispatch();
+  
+  /** @type {Function} navigate - React Router navigation function */
   const navigate = useNavigate();
 
+  /**
+   * Handles form submission, clears cart and redirects to home
+   * @param {Event} e - Form submission event
+   */
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would typically handle payment processing
     dispatch(clearCart());
     navigate('/');
     alert('Thank you for your purchase!');
@@ -59,4 +76,4 @@ const Checkout = () => {
   );
 };
 
-export default Checkout; 
+export default Checkout;

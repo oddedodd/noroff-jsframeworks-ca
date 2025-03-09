@@ -3,6 +3,15 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import { Cart } from './Cart';
 
+/**
+ * Navigation bar component that provides site navigation, search, and cart access
+ * @component
+ * @returns {JSX.Element} A responsive navigation bar with logo, search, links and cart
+ * @example
+ * return (
+ *   <Navbar />
+ * )
+ */
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,14 +27,13 @@ const Navbar = () => {
         <div className="hidden md:flex md:absolute md:left-1/2 md:-translate-x-1/2">
           <SearchBar />
         </div>
-        {/* Mobile Search B */}
+        {/* Mobile Search Bar */}
         <div className="absolute left-0 right-0 px-4 md:hidden -bottom-14 bg-white pb-4">
           <SearchBar />
         </div>
 
-        {/* Navigation Links and Cart for Desktop / Menu Button for Mobile */}
         <div className="flex items-center gap-4">
-          {/* Navigation Links */}
+      
           <div
             className={`flex flex-col items-center md:flex-row md:items-center md:gap-6 absolute md:static bg-white w-full md:w-auto left-0 top-10 md:top-auto transition-transform transform ${
               isOpen ? "translate-x-0" : "-translate-x-full"
@@ -38,8 +46,6 @@ const Navbar = () => {
               Contact
             </a>
           </div>
-
-      
 
           {/* Mobile Menu Button */}
           <button
