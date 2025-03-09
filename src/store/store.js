@@ -1,5 +1,10 @@
+/**
+ * @fileoverview Redux store configuration and initialization
+ */
+
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './cartSlice';
+
 
 export const store = configureStore({
   reducer: {
@@ -7,11 +12,14 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: false, // This helps prevent serialization issues
+      serializableCheck: false, 
     }),
 });
 
-// Optional: Subscribe to store changes to save state
+/**
+ * Subscribe to store changes to persist cart state in localStorage
+ * @listens store.subscribe
+ */
 store.subscribe(() => {
   const state = store.getState();
   try {

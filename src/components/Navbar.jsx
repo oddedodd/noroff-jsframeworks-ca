@@ -27,17 +27,14 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           {/* Navigation Links */}
           <div
-            className={`flex flex-col md:flex-row md:items-center md:gap-6 absolute md:static bg-white w-full md:w-auto left-0 top-10 md:top-auto transition-transform transform ${
+            className={`flex flex-col items-center md:flex-row md:items-center md:gap-6 absolute md:static bg-white w-full md:w-auto left-0 top-10 md:top-auto transition-transform transform ${
               isOpen ? "translate-x-0" : "-translate-x-full"
-            } md:translate-x-0 p-4 md:p-0 shadow-md md:shadow-none`}
+            } md:translate-x-0 p-4 md:p-0 shadow-md md:shadow-none space-y-4 md:space-y-0`}
           >
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="/" className="text-gray-700 hover:text-red-600">
               Home
             </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
-              Products
-            </a>
-            <a href="#" className="text-gray-700 hover:text-blue-600">
+            <a href="/contact" className="text-gray-700 hover:text-red-600">
               Contact
             </a>
           </div>

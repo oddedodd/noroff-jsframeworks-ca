@@ -1,8 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Contact from './pages/Contact';
 import About from './pages/About';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import { SearchProvider } from './context/SearchContext';
@@ -10,13 +8,13 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import DisplayCart from './components/DisplayCart';
 import Checkout from './components/Checkout';
+import Layout from './components/Layout';
 
 function App() {
   return (
     <SearchProvider>
       <Provider store={store}>
-        <div className="min-h-screen bg-gray-50">
-          <Navbar />
+        <Layout>
           <Routes>
             <Route path="/" element={<ProductList />} />
             <Route path="/products" element={<ProductList />} />
@@ -26,9 +24,7 @@ function App() {
             <Route path="/cart" element={<DisplayCart />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
-        </div>
-        <Footer />
-
+        </Layout>
       </Provider>
     </SearchProvider>
   );
