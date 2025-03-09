@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
 import { SearchProvider } from './context/SearchContext';
@@ -26,6 +27,8 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </div>
+        <Footer />
+
       </Provider>
     </SearchProvider>
   );
