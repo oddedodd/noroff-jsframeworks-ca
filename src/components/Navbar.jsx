@@ -9,16 +9,16 @@ const Navbar = () => {
   return (
     <nav className="bg-white sticky top-0 z-50">
       <div className="container mx-auto flex items-center justify-between p-4">
-        {/* Logo */}
+        
         <a href="/" className="text-lg md:text-2xl font-bold text-red-500 flex items-center gap-1 md:gap-2 whitespace-nowrap">
           <ShoppingBag className="w-5 md:w-6 h-5 md:h-6" /> <span>AllStar Avenue</span>
         </a>
 
-        {/* Search - Below on mobile, centered on desktop */}
+        {/* Search Bar  */}
         <div className="hidden md:flex md:absolute md:left-1/2 md:-translate-x-1/2">
           <SearchBar />
         </div>
-        {/* Mobile Search - Full width below header */}
+        {/* Mobile Search B */}
         <div className="absolute left-0 right-0 px-4 md:hidden -bottom-14 bg-white pb-4">
           <SearchBar />
         </div>

@@ -42,7 +42,7 @@ const ProductDetails = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="bg-white rounded-lg shadow-md overflow-hidden max-w-4xl mx-auto">
+      <div className="bg-white rounded-lg overflow-hidden max-w-4xl mx-auto">
         <div className="flex flex-col">
           <div className="w-full relative">
             <img
@@ -52,7 +52,7 @@ const ProductDetails = () => {
             />
             <button 
               onClick={() => setIsLightboxOpen(true)}
-              className="absolute bottom-4 right-4 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
+              className="absolute bottom-4 right-4 bg-white p-2 cursor-pointer rounded-full shadow-md hover:bg-gray-100 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <Fullscreen />
@@ -63,12 +63,12 @@ const ProductDetails = () => {
             <h1 className="text-2xl font-semibold mb-4">{product.title}</h1>
             <p className="text-gray-600 mb-4">{product.description}</p>
             <div className="mb-4">
-              <span className="text-2xl font-bold text-blue-600">
-                ${product.discountedPrice < product.price 
+              <span className="text-2xl font-bold text-red-600">
+                {product.discountedPrice < product.price 
                   ? (
                     <>
-                      <span className="line-through text-gray-400 text-xl mr-2">${product.price}</span>
-                      ${product.discountedPrice}
+                      <span className="line-through text-gray-400 text-xl mr-2">NOK {product.price},- </span>
+                      NOK {product.discountedPrice},-
                     </>
                   ) 
                   : product.price}
@@ -88,7 +88,7 @@ const ProductDetails = () => {
             )}
             <button 
               onClick={handleAddToCart}
-              className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition-colors w-full md:w-auto"
+              className="bg-red-600 text-white px-6 py-3 rounded hover:bg-red-700 cursor-pointer transition-colors w-full md:w-auto"
             >
               Add to Cart
             </button>
